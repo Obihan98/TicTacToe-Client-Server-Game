@@ -1,27 +1,26 @@
 package src.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.*;
 
-import src.model.TicTacToe;
+import src.model.Game;
 
 public class ServerWithThreadPool {
     
-    private Socket aSocket;
+    private Socket player1, player2;
 	private ServerSocket serverSocket;
-	private PrintWriter socketOut;
-	private BufferedReader socketIn;
+	private BufferedReader input1, input2;
+	private PrintWriter output1, output2;
 	
 	private ExecutorService pool;
 
 	public ServerWithThreadPool(int port) {
 		try {
 			serverSocket = new ServerSocket(port);
-			pool = Executors.newFixedThreadPool(2);
+			pool = Executors.newCachedThreadPool();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,22 +30,25 @@ public class ServerWithThreadPool {
     public void runServer () {
 		try {
 			while (true) {
-				aSocket = serverSocket.accept();
-				System.out.println("Connection accepted by server!");
-				socketIn = new BufferedReader (new InputStreamReader (aSocket.getInputStream())); // Get input
-				socketOut = new PrintWriter((aSocket.getOutputStream()), true); // Send output
-				
-				TicTacToe cap = new TicTacToe (socketIn, socketOut); // Play the game
-				pool.execute(cap);
+				player1 = serverSocket.accept();
+				System.out.println("Player 1 Connected!");
+
+				player2 = serverSocket.accept();
+				System.out.println("Player 2 Connected!");
+
+				// Paramaters are input and output sockets for the 2 players
+				Game currentGame = new Game(input1, input2, output1, output2);
+				pool.execute(currentGame);
 			}
 			
 		}catch (IOException e) {}
 		pool.shutdown();
 		
 		try {
-			socketIn.close();
-			socketOut.close();
-			aSocket.close();
+			input1.close();
+			input2.close();
+			output1.close();
+			output2.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +59,5 @@ public class ServerWithThreadPool {
 	public static void main (String [] args){
 		ServerWithThreadPool myServer = new ServerWithThreadPool (9898);
 		myServer.runServer();
-	
 	}
-
 }
