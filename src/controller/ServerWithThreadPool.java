@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.*;
 
@@ -31,13 +32,18 @@ public class ServerWithThreadPool {
 		try {
 			while (true) {
 				player1 = serverSocket.accept();
+				input1 = new BufferedReader (new InputStreamReader (player1.getInputStream()));
+				output1 = new PrintWriter((player1.getOutputStream()), true);
 				System.out.println("Player 1 Connected!");
 
 				player2 = serverSocket.accept();
+				input2 = new BufferedReader (new InputStreamReader (player2.getInputStream()));
+				output2 = new PrintWriter((player2.getOutputStream()), true);
 				System.out.println("Player 2 Connected!");
 
 				// Paramaters are input and output sockets for the 2 players
 				Game currentGame = new Game(input1, input2, output1, output2);
+				System.out.println("Game Started!");
 				pool.execute(currentGame);
 			}
 			

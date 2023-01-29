@@ -47,14 +47,10 @@ public class Board implements Constants {
 		addHyphens();
 		for (int row = 0; row < 3; row++) {
 			addSpaces();
-			output1.print("    row " + row + ' ');
-            output2.print("    row " + row + ' ');
-			for (int col = 0; col < 3; col++){
-                output1.print("|  " + getMark(row, col) + "  ");
-                output2.print("|  " + getMark(row, col) + "  ");
-            }
-            output1.println("|");
-            output2.println("|");
+			System.out.print("    row " + row + ' ');
+			for (int col = 0; col < 3; col++)
+				System.out.print("|  " + getMark(row, col) + "  ");
+			System.out.println("|");
 			addSpaces();
 			addHyphens();
 		}

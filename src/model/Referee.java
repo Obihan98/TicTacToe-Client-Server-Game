@@ -14,7 +14,7 @@ class Referee {
 	void runTheGame() throws IOException {
 		xPlayer.setOpponent(oPlayer);
 		oPlayer.setOpponent(xPlayer);
-		System.out.println("\nReferee started the game...");
+		System.out.println("\nReferee started the game...\n");
 		board.display();
 		xPlayer.play();
 		System.out.println("\nReferee ended the game ...");

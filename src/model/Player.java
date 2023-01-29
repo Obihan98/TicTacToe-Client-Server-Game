@@ -47,44 +47,48 @@ class Player implements Constants {
 		}
 
         // When the game is over send the following to both players.
-		output.print("\nTHE GAME IS OVER: ");
-        opponent.output.print("\nTHE GAME IS OVER: ");
+		output.print("THE GAME IS OVER: ");
+        opponent.output.print("THE GAME IS OVER: ");
 		if (board.xWins() != false) {
-            output.print(name() + " is the winner!\n\n");
-            opponent.output.print(name() + " is the winner!\n\n");
+            output.print(name() + " is the winner! ");
+            opponent.output.print(name() + " is the winner! ");
         }
 		else if (board.oWins() != false) {
-            output.print(opponent.name() + " is the winner!\n\n");
-            opponent.output.print(opponent.name() + " is the winner!\n\n");
+            output.print(opponent.name() + " is the winner! ");
+            opponent.output.print(opponent.name() + " is the winner! ");
         }
 		else {
-			output.print("the game is a tie.\n\n");
-            opponent.output.print("the game is a tie.\n\n");
+			output.print("the game is a tie. ");
+            opponent.output.print("the game is a tie. ");
         }
 	}
 
 	private void makeMove() throws IOException {
 		String regex = "[0-9]+"; 
-		output.print(name + ", what row should your next " + mark() + " be placed in?    ");
+		output.println(name + ", what row should your next " + mark() + " be placed in? ");
+		System.out.println("Move asked for " + mark());
 		int row, col;
 		String rStr, cStr;
 
 		rStr = input.readLine();
 
 		while(!rStr.matches(regex)){
-			output.print(name + ", what row should your next " + mark() + " be placed in?    ");
+			output.println(name + ", what row should your next " + mark() + " be placed in? ");
+			System.out.println("Move asked for " + mark() + " again");
 			rStr = input.readLine();
 		}
 			
 		row =  Integer.parseInt(rStr);
 
 		output.flush();
-		output.print(name + ", what column should your next " + mark() + " be placed in? ");
+		output.println(name + ", what column should your next " + mark() + " be placed in? ");
+		System.out.println("Move asked for " + mark());
 
 		cStr = input.readLine();
 		
 		while(!cStr.matches(regex)){
-			output.print(name + ", what column should your next " + mark() + " be placed in?    ");
+			output.println(name + ", what column should your next " + mark() + " be placed in? ");
+			System.out.println("Move asked for " + mark() + " again");
 			cStr = input.readLine();
 		}
 		
@@ -94,7 +98,7 @@ class Player implements Constants {
             boolean acceptableInput = isAcceptableUserInput(row, col, rStr, cStr); 
 			if (acceptableInput == true) break;
 
-			output.print("Please enter the row again:    ");
+			output.print("Please enter the row again: ");
 			rStr = input.readLine();
 			row = Integer.parseInt(rStr);
 			output.print("Please enter the column again: ");
@@ -111,17 +115,17 @@ class Player implements Constants {
 		boolean acceptableInput = true;
 		if (rStr == null || cStr == null) {
 			output.print("Sorry, " + name()
-					+ ", I couldn't understand your input.\n");
+					+ ", I couldn't understand your input. ");
 			acceptableInput = false;
 		} else if (row < 0 || row >= 3 || col < 0 || col >= 3) {
 			output.print("Sorry, " + name
 					+ ", but there is no square with coordinates (row="
-					+ row + ", col=" + col + ").\n");
+					+ row + ", col=" + col + "). ");
 			acceptableInput = false;
 		} else if (board.getMark(row, col) != SPACE_CHAR) {
 			output.print("Sorry, " + name
 					+ ", but the square with coordinates (row=" + row
-					+ ", col=" + col + ") is marked.\n");
+					+ ", col=" + col + ") is marked. ");
 			acceptableInput = false;
 		}
 		
