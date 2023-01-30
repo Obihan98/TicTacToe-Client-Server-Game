@@ -13,7 +13,7 @@ public class Game implements Constants, Runnable {
 	private Referee theRef;
 	
     public Game(BufferedReader input1, BufferedReader input2, PrintWriter output1, PrintWriter output2) {
-        theBoard  = new Board(output1, output2);
+        theBoard  = new Board();
         this.input1 = input1;
 		this.input2 = input2;
 		this.output1 = output1;

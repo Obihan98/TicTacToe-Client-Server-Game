@@ -37,12 +37,19 @@ public class ClientController {
 			} catch(IOException e) {
 				e.getStackTrace();
 			}
-
+			display();
+			int i = 0;
 			// Keeps getting 
 			while (true) {
 				try {
+					if (i % 2 == 0){
+						display();
+					}
+
 					String response = socketIn.readLine(); // read response from the socket
 					System.out.print(response);
+
+					i++;
 
 					if (response == "THE GAME IS OVER: ") {
 						break;
@@ -51,6 +58,10 @@ public class ClientController {
 					Scanner scanner = new Scanner(System.in); // get user move from user
 					String userMove = scanner.nextLine();
 					socketOut.println(userMove); // send username move to the server
+
+					if (i % 2 == 0){
+						display();
+					}
 				} catch (Exception e) {
 					e.getStackTrace();
 				}
@@ -66,6 +77,13 @@ public class ClientController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	public void display() throws IOException {
+		for (int i = 0; i < 14; i++){
+			String response = socketIn.readLine(); // read response from the socket
+			System.out.println(response);
 		}
 	}
 	

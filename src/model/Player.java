@@ -3,7 +3,7 @@ import java.io.*;
 
 class Player implements Constants {
     private BufferedReader input;
-    private PrintWriter output;
+    public PrintWriter output;
 
 	private String name;
 	private Board board;
@@ -38,15 +38,17 @@ class Player implements Constants {
 		board.clear();
 
 		while ((board.xWins() == false) && (board.oWins() == false) && (board.isFull() == false)) {
+			board.display(output);
 			makeMove();
-			board.display();
+			board.display(output);
 			if (board.xWins() == false && board.isFull() == false){
+				board.display(opponent.output);
 				opponent.makeMove();
-				board.display();
+				board.display(opponent.output);
 			}
 		}
 
-        // When the game is over send the following to both players.
+        // When the game is over sesnd the following to both players.
 		output.print("THE GAME IS OVER: ");
         opponent.output.print("THE GAME IS OVER: ");
 		if (board.xWins() != false) {
@@ -66,7 +68,6 @@ class Player implements Constants {
 	private void makeMove() throws IOException {
 		String regex = "[0-9]+"; 
 		output.println(name + ", what row should your next " + mark() + " be placed in? ");
-		System.out.println("Move asked for " + mark());
 		int row, col;
 		String rStr, cStr;
 
@@ -74,7 +75,6 @@ class Player implements Constants {
 
 		while(!rStr.matches(regex)){
 			output.println(name + ", what row should your next " + mark() + " be placed in? ");
-			System.out.println("Move asked for " + mark() + " again");
 			rStr = input.readLine();
 		}
 			
@@ -82,13 +82,11 @@ class Player implements Constants {
 
 		output.flush();
 		output.println(name + ", what column should your next " + mark() + " be placed in? ");
-		System.out.println("Move asked for " + mark());
 
 		cStr = input.readLine();
 		
 		while(!cStr.matches(regex)){
 			output.println(name + ", what column should your next " + mark() + " be placed in? ");
-			System.out.println("Move asked for " + mark() + " again");
 			cStr = input.readLine();
 		}
 		

@@ -15,7 +15,8 @@ class Referee {
 		xPlayer.setOpponent(oPlayer);
 		oPlayer.setOpponent(xPlayer);
 		System.out.println("\nReferee started the game...\n");
-		board.display();
+		board.display(oPlayer.output);
+		board.display(xPlayer.output);
 		xPlayer.play();
 		System.out.println("\nReferee ended the game ...");
 	}

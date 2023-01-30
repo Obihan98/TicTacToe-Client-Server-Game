@@ -5,11 +5,9 @@ import java.io.PrintWriter;
 public class Board implements Constants {
 	private char theBoard[][];
 	private int markCount;
-    private PrintWriter output1, output2;
+    private PrintWriter output;
 
-	public Board(PrintWriter output1, PrintWriter output2) {
-        this.output1 = output1;
-        this.output2 = output2;
+	public Board() {
 		markCount = 0;
 		theBoard = new char[3][];
 		for (int i = 0; i < 3; i++) {
@@ -42,17 +40,18 @@ public class Board implements Constants {
 	}
 
     // Whenever display is called, the board is send to both players' output sockets
-	public void display() {
-		displayColumnHeaders();
-		addHyphens();
+	public void display(PrintWriter output) {
+		displayColumnHeaders(output);
+		addHyphens(output);
 		for (int row = 0; row < 3; row++) {
-			addSpaces();
-			System.out.print("    row " + row + ' ');
+			addSpaces(output);
+			output.print("    row " + row + ' ');
+
 			for (int col = 0; col < 3; col++)
-				System.out.print("|  " + getMark(row, col) + "  ");
-			System.out.println("|");
-			addSpaces();
-			addHyphens();
+				output.print("|  " + getMark(row, col) + "  ");
+			output.println("|");
+			addSpaces(output);
+			addHyphens(output);
 		}
 	}
 
@@ -111,24 +110,28 @@ public class Board implements Constants {
 		return result;
 	}
 
-	void displayColumnHeaders() {
-		System.out.print("          ");
-		for (int j = 0; j < 3; j++)
-			System.out.print("|col " + j);
-		System.out.println();
+	void displayColumnHeaders(PrintWriter output) {
+		output.print("          ");
+		for (int j = 0; j < 3; j++){
+			output.print("|col " + j);
+		}
+		output.println();
 	}
 
-	void addHyphens() {
-		System.out.print("          ");
-		for (int j = 0; j < 3; j++)
-			System.out.print("+-----");
-		System.out.println("+");
+	void addHyphens(PrintWriter output) {
+		output.print("          ");
+		for (int j = 0; j < 3; j++){
+			output.print("+-----");
+		}
+		output.println("+");
 	}
 
-	void addSpaces() {
-		System.out.print("          ");
-		for (int j = 0; j < 3; j++)
-			System.out.print("|     ");
-		System.out.println("|");
+	void addSpaces(PrintWriter output) {
+		output.print("          ");
+
+		for (int j = 0; j < 3; j++){
+			output.print("|     ");
+		}
+		output.println("|");
 	}
 }
