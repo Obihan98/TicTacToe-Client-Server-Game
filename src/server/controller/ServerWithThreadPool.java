@@ -1,4 +1,5 @@
 package src.server.controller;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +24,6 @@ public class ServerWithThreadPool {
 			serverSocket = new ServerSocket(port);
 			pool = Executors.newCachedThreadPool();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

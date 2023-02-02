@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 public class Board implements Constants {
 	private char theBoard[][];
 	private int markCount;
-    //private PrintWriter output;
 
 	public Board() {
 		markCount = 0;

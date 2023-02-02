@@ -116,7 +116,7 @@ class Player implements Constants {
 	
 
 
-      private boolean isAcceptableUserInput(int row, int col, String rStr, String cStr) {
+    private boolean isAcceptableUserInput(int row, int col, String rStr, String cStr) {
 		boolean acceptableInput = true;
 		if (rStr == null || cStr == null) {
 			output.println("Sorry, " + name()
