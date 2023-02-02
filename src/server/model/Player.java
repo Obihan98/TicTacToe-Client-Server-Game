@@ -34,6 +34,7 @@ class Player implements Constants {
 		return mark;
 	}
 
+	// This is the players move and keeps on playing till someone wins or board is full
 	public void play() throws IOException {
 	
 		board.clear();
@@ -45,7 +46,6 @@ class Player implements Constants {
 			board.display(output);
 			if (board.xWins() == false && board.isFull() == false){
 				board.display(opponent.output);
-				// opponent.output.print(opponent.name);
 				opponent.makeMove();
 				board.display(opponent.output);
 			}
@@ -56,6 +56,7 @@ class Player implements Constants {
 		String gameOverPlayer2 = "";
 		gameOverPlayer1 += "THE GAME IS OVER: ";
 		gameOverPlayer2 += "THE GAME IS OVER: ";
+
 		if (board.xWins() != false) {
 			gameOverPlayer1 += name() + " is the winner!";
 			gameOverPlayer2 += name() + " is the winner!";
@@ -68,10 +69,12 @@ class Player implements Constants {
 			gameOverPlayer1 += "the game is a tie.";
 			gameOverPlayer2 += "the game is a tie.";
         }
+
 		output.println(gameOverPlayer1);
 		opponent.output.println(gameOverPlayer2);
 	}
 
+	// Asks the player the specific row and column to make the move
 	private void makeMove() throws IOException {
 		String regex = "[0-9]+"; 
 		output.println(name + ", what row should your next " + mark() + " be placed in? ");
@@ -99,6 +102,7 @@ class Player implements Constants {
 		
 		col = Integer.parseInt(cStr);
 
+		// Checks if valid input and keeps on asking the inputs till it is valid
 		while (true) {
             boolean acceptableInput = isAcceptableUserInput(row, col, rStr, cStr); 
 			if (acceptableInput == true) break;
@@ -111,11 +115,12 @@ class Player implements Constants {
 			col = Integer.parseInt(cStr);
 		}
 		
+		// Once valid move is inputed, the mark is added to the board
 		board.addMark(row, col, mark());
 	}
 	
 
-
+	// Checks if the inputed row and column number is a valid move or space
     private boolean isAcceptableUserInput(int row, int col, String rStr, String cStr) {
 		boolean acceptableInput = true;
 		if (rStr == null || cStr == null) {

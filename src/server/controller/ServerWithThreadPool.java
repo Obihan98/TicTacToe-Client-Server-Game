@@ -56,7 +56,6 @@ public class ServerWithThreadPool {
 			output1.close();
 			output2.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

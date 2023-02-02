@@ -16,18 +16,18 @@ public class ClientController {
 
 	public ClientController (String serverName, int portNumber) {
 		myClientView = new ClientView();
-		try{
+		try {
 			aSocket = new Socket (serverName, portNumber);
 			socketIn = new BufferedReader (new InputStreamReader (aSocket.getInputStream()));
 			socketOut = new PrintWriter((aSocket.getOutputStream()), true);
 			System.out.println("Connected Successfully!");
 			boolean gameOver = false;
-			try
-			{
 			
+			try {
 				String response = "";
-				while(!gameOver)
-				{
+
+				// Keeps on listening till client gets a response that contains the string OVER
+				while(!gameOver) {
 					myClientView.showResponses("\n");
 					response = socketIn.readLine();
 					if(response.contains("what") || response.contains("name"))
@@ -56,8 +56,6 @@ public class ClientController {
 			}
 		}
 
-
-	
 	public static void main (String [] args) throws IOException{
 		ClientController myClient = new ClientController ("localhost", 9898);
 	}

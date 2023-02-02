@@ -12,6 +12,7 @@ class Referee {
 		
 	}
 
+	//This will start the game
 	void runTheGame() throws IOException {
 		xPlayer.setOpponent(oPlayer);
 		oPlayer.setOpponent(xPlayer);
