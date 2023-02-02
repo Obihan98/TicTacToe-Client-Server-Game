@@ -1,4 +1,5 @@
-package src.model;
+package src.server.model;
+
 import java.io.*;
 
 class Referee {

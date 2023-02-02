@@ -1,4 +1,4 @@
-package src.model;
+package src.server.model;
 
 public interface Constants {
 	static final char SPACE_CHAR = ' ';

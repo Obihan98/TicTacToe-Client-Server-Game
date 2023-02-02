@@ -1,4 +1,4 @@
-package src.model;
+package src.server.model;
 import java.io.*;
 
 //STUDENTS SHOULD ADD CLASS COMMENT, METHOD COMMENTS, FIELD COMMENTS 
@@ -43,7 +43,6 @@ public class Game implements Constants, Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-		
 
 		xPlayer = new Player(name, LETTER_X, input1, output1);
 		xPlayer.setBoard(this.theBoard);

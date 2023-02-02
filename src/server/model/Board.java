@@ -1,11 +1,11 @@
-package src.model;
+package src.server.model;
 
 import java.io.PrintWriter;
 
 public class Board implements Constants {
 	private char theBoard[][];
 	private int markCount;
-    private PrintWriter output;
+    //private PrintWriter output;
 
 	public Board() {
 		markCount = 0;
@@ -33,7 +33,7 @@ public class Board implements Constants {
 	}
 
 	public boolean oWins() {
-		if (checkWinner(LETTER_X) == 1)
+		if (checkWinner(LETTER_O) == 1) // neeed to check to LETTER_0
 			return true;
 		else
 			return false;
@@ -41,6 +41,7 @@ public class Board implements Constants {
 
     // Whenever display is called, the board is send to both players' output sockets
 	public void display(PrintWriter output) {
+		// output.print("Your board: \n");
 		displayColumnHeaders(output);
 		addHyphens(output);
 		for (int row = 0; row < 3; row++) {

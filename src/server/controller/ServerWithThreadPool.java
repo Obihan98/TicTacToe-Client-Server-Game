@@ -1,4 +1,4 @@
-package src.controller;
+package src.server.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.*;
 
-import src.model.Game;
+import src.server.model.Game;
 
 public class ServerWithThreadPool {
     

@@ -1,4 +1,5 @@
-package src.model;
+package src.server.model;
+
 import java.io.*;
 
 class Player implements Constants {
@@ -39,30 +40,36 @@ class Player implements Constants {
 
 		while ((board.xWins() == false) && (board.oWins() == false) && (board.isFull() == false)) {
 			board.display(output);
+			opponent.output.println("Please wait, it is "+ name() + "'s turn");
 			makeMove();
 			board.display(output);
 			if (board.xWins() == false && board.isFull() == false){
 				board.display(opponent.output);
+				// opponent.output.print(opponent.name);
 				opponent.makeMove();
 				board.display(opponent.output);
 			}
 		}
 
-        // When the game is over sesnd the following to both players.
-		output.print("THE GAME IS OVER: ");
-        opponent.output.print("THE GAME IS OVER: ");
+        // When the game is over, sends the following to both players.
+		String gameOverPlayer1 = "";
+		String gameOverPlayer2 = "";
+		gameOverPlayer1 += "THE GAME IS OVER: ";
+		gameOverPlayer2 += "THE GAME IS OVER: ";
 		if (board.xWins() != false) {
-            output.print(name() + " is the winner! ");
-            opponent.output.print(name() + " is the winner! ");
+			gameOverPlayer1 += name() + " is the winner!";
+			gameOverPlayer2 += name() + " is the winner!";
         }
 		else if (board.oWins() != false) {
-            output.print(opponent.name() + " is the winner! ");
-            opponent.output.print(opponent.name() + " is the winner! ");
+			gameOverPlayer1 += opponent.name() + " is the winner!";
+			gameOverPlayer2 += 	opponent.name() + " is the winner!";
         }
 		else {
-			output.print("the game is a tie. ");
-            opponent.output.print("the game is a tie. ");
+			gameOverPlayer1 += "the game is a tie.";
+			gameOverPlayer2 += "the game is a tie.";
         }
+		output.println(gameOverPlayer1);
+		opponent.output.println(gameOverPlayer2);
 	}
 
 	private void makeMove() throws IOException {
@@ -96,10 +103,10 @@ class Player implements Constants {
             boolean acceptableInput = isAcceptableUserInput(row, col, rStr, cStr); 
 			if (acceptableInput == true) break;
 
-			output.print("Please enter the row again: ");
+			output.println("Please enter the row again: ");
 			rStr = input.readLine();
 			row = Integer.parseInt(rStr);
-			output.print("Please enter the column again: ");
+			output.println("Please enter the column again: ");
 			cStr = input.readLine();
 			col = Integer.parseInt(cStr);
 		}
@@ -112,16 +119,16 @@ class Player implements Constants {
       private boolean isAcceptableUserInput(int row, int col, String rStr, String cStr) {
 		boolean acceptableInput = true;
 		if (rStr == null || cStr == null) {
-			output.print("Sorry, " + name()
+			output.println("Sorry, " + name()
 					+ ", I couldn't understand your input. ");
 			acceptableInput = false;
 		} else if (row < 0 || row >= 3 || col < 0 || col >= 3) {
-			output.print("Sorry, " + name
+			output.println("Sorry, " + name
 					+ ", but there is no square with coordinates (row="
 					+ row + ", col=" + col + "). ");
 			acceptableInput = false;
 		} else if (board.getMark(row, col) != SPACE_CHAR) {
-			output.print("Sorry, " + name
+			output.println("Sorry, " + name
 					+ ", but the square with coordinates (row=" + row
 					+ ", col=" + col + ") is marked. ");
 			acceptableInput = false;
