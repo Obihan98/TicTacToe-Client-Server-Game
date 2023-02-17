@@ -1,4 +1,4 @@
-# Assignment1-tictactoe
+# Tic-Tac-Toe Game - MVC and Client-Server Architecture
 
 Tac Tac Toe game is implemented as a client server 2 player game. The game was refractored to follow the MVC model. Multiple games can be
 initialized, each being a thread, with 2 players at most. The server wait for 2 players to join and only then starts the game. 
